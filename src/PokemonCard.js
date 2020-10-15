@@ -3,10 +3,16 @@ import React from "react";
 class PokemonCard extends React.Component {
   render() {
     return (
-      <div>
-        <div className="pokemon-card-header">{this.props.id}</div>
-        <img src={this.props.img} alt={this.props.name + " Image"} />
-        <div className="pokemon-card-footer">{this.props.name}</div>
+      <div
+        className="pokemon-card"
+        onClick={(e) => this.props.selectPokemon(e, this.props.pokemon)}
+      >
+        <div className="pokemon-card-header">{this.props.pokemon.id}</div>
+        <img
+          src={this.props.pokemon.sprites.front_default}
+          alt={this.props.pokemon.name + " Image"}
+        />
+        <div className="pokemon-card-footer">{this.props.pokemon.name}</div>
       </div>
     );
   }
