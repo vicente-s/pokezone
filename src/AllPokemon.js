@@ -62,8 +62,54 @@ class AllPokemon extends React.Component {
     const modal = this.state.showPokemonModal ? (
       <PokemonModal selectedPokemon={this.state.selectedPokemon}>
         <div className="pokemon-modal">
-          <p>You've selected {this.state.selectedPokemon.name}</p>
-          <button onClick={this.handleHide}>Hide Modal</button>
+          <div className="pokemon-modal-container">
+            <h2>{this.state.selectedPokemon.name}</h2>
+            <div className="pokemon-info">
+              <div className="pokemon-info-left-column">
+                {/*<img
+                  src={
+                    this.state.selectedPokemon.sprites.other["official-artwork"]
+                      .front_default
+                  }
+                  alt={this.state.selectedPokemon.name + " Sprite"}
+                />*/}
+                <p>Types: {this.state.selectedPokemon.types[0].type.name}</p>
+              </div>
+              <div className="pokemon-info-right-column">
+                <ul className="height-weight-list">
+                  <li>
+                    Height: {this.state.selectedPokemon.height} decimeters
+                  </li>
+                  <li>
+                    Weight: {this.state.selectedPokemon.weight} hectograms
+                  </li>
+                </ul>
+                <dl>
+                  <dt>Stats</dt>
+                  <dd className="percentage percentage-10">
+                    <span className="text">HP</span>
+                  </dd>
+                  <dd className="percentage percentage-20">
+                    <span className="text">Attack</span>
+                  </dd>
+                  <dd className="percentage percentage-30">
+                    <span className="text">Defense</span>
+                  </dd>
+                  <dd className="percentage percentage-40">
+                    <span className="text">Special Attack</span>
+                  </dd>
+                  <dd className="percentage percentage-50">
+                    <span className="text">Special Defense</span>
+                  </dd>
+                  <dd className="percentage percentage-60">
+                    <span className="text">Speed</span>
+                  </dd>
+                </dl>
+              </div>
+            </div>
+            {/* <p>Abilities: </p> */}
+            <button onClick={this.handleHide}>Hide Modal</button>
+          </div>
         </div>
       </PokemonModal>
     ) : null;
