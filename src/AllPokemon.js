@@ -17,7 +17,7 @@ class AllPokemon extends React.Component {
   }
 
   getKhantoPokemon = async () => {
-    let results = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=150/");
+    let results = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=151/");
     let allPokemon = await results.json();
     allPokemon.results.forEach((pokemon) => {
       fetch(pokemon.url)
@@ -63,17 +63,26 @@ class AllPokemon extends React.Component {
       <PokemonModal selectedPokemon={this.state.selectedPokemon}>
         <div className="pokemon-modal">
           <div className="pokemon-modal-container">
-            <h2>{this.state.selectedPokemon.name}</h2>
+            {/* POKEMON NAME */}
+            <div className="pokemon-modal-header">
+              <h2>{this.state.selectedPokemon.name}</h2>
+              <button onClick={this.handleHide}>Hide this modal</button>
+            </div>
             <div className="pokemon-info">
               <div className="pokemon-info-left-column">
-                {/*<img
+                <p>No. {this.state.selectedPokemon.id}</p>
+                <img
                   src={
                     this.state.selectedPokemon.sprites.other["official-artwork"]
                       .front_default
                   }
                   alt={this.state.selectedPokemon.name + " Sprite"}
-                />*/}
-                <p>Types: {this.state.selectedPokemon.types[0].type.name}</p>
+                />
+                <ul className="pokemon-types">
+                  {this.state.selectedPokemon.types.map((type) => (
+                    <li>{type.type.name}</li>
+                  ))}
+                </ul>
               </div>
               <div className="pokemon-info-right-column">
                 <ul className="height-weight-list">
@@ -86,29 +95,64 @@ class AllPokemon extends React.Component {
                 </ul>
                 <dl>
                   <dt>Stats</dt>
-                  <dd className="percentage percentage-10">
+                  <dd
+                    className={
+                      "percentage percentage-" +
+                      this.state.selectedPokemon.stats[0].base_stat
+                    }
+                  >
                     <span className="text">HP</span>
                   </dd>
-                  <dd className="percentage percentage-20">
+                  <dd
+                    className={
+                      "percentage percentage-" +
+                      this.state.selectedPokemon.stats[1].base_stat
+                    }
+                  >
                     <span className="text">Attack</span>
                   </dd>
-                  <dd className="percentage percentage-30">
+                  <dd
+                    className={
+                      "percentage percentage-" +
+                      this.state.selectedPokemon.stats[2].base_stat
+                    }
+                  >
                     <span className="text">Defense</span>
                   </dd>
-                  <dd className="percentage percentage-40">
+                  <dd
+                    className={
+                      "percentage percentage-" +
+                      this.state.selectedPokemon.stats[3].base_stat
+                    }
+                  >
                     <span className="text">Special Attack</span>
                   </dd>
-                  <dd className="percentage percentage-50">
+                  <dd
+                    className={
+                      "percentage percentage-" +
+                      this.state.selectedPokemon.stats[4].base_stat
+                    }
+                  >
                     <span className="text">Special Defense</span>
                   </dd>
-                  <dd className="percentage percentage-60">
+                  <dd
+                    className={
+                      "percentage percentage-" +
+                      this.state.selectedPokemon.stats[5].base_stat
+                    }
+                  >
                     <span className="text">Speed</span>
                   </dd>
                 </dl>
+                <ul>
+                  <li>
+                    <img
+                      src={this.state.selectedPokemon.sprites.front_default}
+                    />
+                  </li>
+                </ul>
               </div>
             </div>
-            {/* <p>Abilities: </p> */}
-            <button onClick={this.handleHide}>Hide Modal</button>
           </div>
         </div>
       </PokemonModal>

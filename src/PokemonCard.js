@@ -9,7 +9,9 @@ class PokemonCard extends React.Component {
       >
         <div className="pokemon-card-header">{this.props.pokemon.id}</div>
         <img
-          src={this.props.pokemon.sprites.front_default}
+          src={
+            this.props.pokemon.sprites.other["official-artwork"].front_default
+          }
           alt={this.props.pokemon.name + " Image"}
         />
         <div className="pokemon-card-footer">{this.props.pokemon.name}</div>
