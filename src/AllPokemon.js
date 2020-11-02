@@ -19,14 +19,12 @@ class AllPokemon extends React.Component {
   getKhantoPokemon = async () => {
     let results = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=151/");
     let allPokemon = await results.json();
-    allPokemon.results.forEach((pokemon) => {
-      fetch(pokemon.url)
-        .then((resp) => resp.json())
-        .then((pokemon) => {
-          let allPokemonCopy = this.state.allPokemon;
-          allPokemonCopy.push(pokemon);
-          this.setState({ allPokemon: allPokemonCopy });
-        });
+    allPokemon.results.forEach(async (pokemon) => {
+      let response = await fetch(pokemon.url);
+      pokemon = await response.json();
+      let allPokemonCopy = this.state.allPokemon;
+      allPokemonCopy.push(pokemon);
+      this.setState({ allPokemon: allPokemonCopy });
     });
   };
 
@@ -63,7 +61,6 @@ class AllPokemon extends React.Component {
       <PokemonModal selectedPokemon={this.state.selectedPokemon}>
         <div className="pokemon-modal">
           <div className="pokemon-modal-container">
-            {/* POKEMON NAME */}
             <div className="pokemon-modal-header">
               <h2>{this.state.selectedPokemon.name}</h2>
               <button onClick={this.handleHide}>Hide this modal</button>
@@ -148,6 +145,7 @@ class AllPokemon extends React.Component {
                   <li>
                     <img
                       src={this.state.selectedPokemon.sprites.front_default}
+                      alt={this.state.selectedPokemon.name + "sprite"}
                     />
                   </li>
                 </ul>
